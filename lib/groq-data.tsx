@@ -98,9 +98,11 @@ export const appearance = groq`
         altText,
         width,
         link,
+        logo {
           asset->{
-          url,
-          'lqip': metadata.lqip
+            url,
+            'lqip': metadata.lqip
+          }
         }
       },
       'quickLinks': quickLinks[]{

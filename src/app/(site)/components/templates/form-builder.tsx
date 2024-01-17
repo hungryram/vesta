@@ -49,8 +49,8 @@ export default function FormBuilder({ formSchema }: FormBuilderProps) {
           <>
             {formSchema.fields.map((field, i) => {
               return (
-                <div key={field._key} className="mb-6">
-                  <label htmlFor={field.label.replace(/ /g, '') + i} className={Styles.formLabel}>
+                <div key={field._key} className="mb-6 grid grid-cols-4 items-center">
+                  <label htmlFor={field.label.replace(/ /g, '') + i} className={`${Styles.formLabel} col-span-1`}>
                     {field.label}
                     {field.required && <span>*</span>}
                   </label>
@@ -101,6 +101,7 @@ export default function FormBuilder({ formSchema }: FormBuilderProps) {
                               id={node.replace(/^[^A-Za-z0-9]+/g, '').replace(/[^A-Za-z0-9_\-:.]/g, '') + i}
                               className="h-4 w-4 rounded border-gray-300"
                               required={field.required ? true : undefined}
+                              value={node}
                             />
                             <label htmlFor={node.replace(/^[^A-Za-z0-9]+/g, '').replace(/[^A-Za-z0-9_\-:.]/g, '') + i} className={Styles.formInputList}>
                               {node}
@@ -132,11 +133,11 @@ export default function FormBuilder({ formSchema }: FormBuilderProps) {
                     </div>
                   )}
                   {field.type === 'select' && (
-                    <div className="flex items-center gap-x-3 mt-4">
+                    <div className="flex gap-x-3 mt-4 col-span-3">
                       <select
                         id={field.label.replace(/ /g, '') + i}
                         name={field.label}
-                        className="block w-full rounded-md border py-1.5 text-gray-900 shadow-sm sm:max-w-xs sm:text-sm sm:leading-6 bg-gray-100"
+                        className={`${Styles.select}`}
                         required={field.required ? true : undefined}
                       >
                         {field?.selectValue?.map((node, i) => {
@@ -152,7 +153,7 @@ export default function FormBuilder({ formSchema }: FormBuilderProps) {
                   {field.type === 'textarea' && (
                     <textarea
                       name={field.label}
-                      className={Styles.formDefaultInput}
+                      className={Styles.textarea}
                       rows={3}
                       id={field.label.replace(/ /g, '') + i}
                       required={field.required ? true : undefined}
@@ -165,17 +166,22 @@ export default function FormBuilder({ formSchema }: FormBuilderProps) {
         )}
         {formSchema?.formDisclaimer &&
           <div className="mb-6 text-xs">
-            <ContentEditor 
+            <ContentEditor
               content={formSchema?.formDisclaimer}
             />
           </div>
         }
-        <button type="submit" className="primary-button" style={{
-          backgroundColor: formSchema?.buttonBackgroundColor?.hex,
-          color: formSchema?.buttonTextColor?.hex
-        }}>
-          {formSchema?.buttonLabel ?? 'Submit'}
-        </button>
+        <div className="grid grid-cols-4">
+          <div className="col-span-1">
+            {/* LEAVE EMPTY */}
+          </div>
+          <button type="submit" className={`${Styles.formSubmit} col-span-3 bg-transparent accent border border-accent py-2`} style={{
+            backgroundColor: formSchema?.buttonBackgroundColor?.hex,
+            color: formSchema?.buttonTextColor?.hex
+          }}>
+            {formSchema?.buttonLabel ?? 'Submit'}
+          </button>
+        </div>
       </form>
     </div>
   );

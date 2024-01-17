@@ -24,6 +24,8 @@ import DisclosureSeparate from "./disclosure-separate";
 import TestimonialsColumn from "./testimonials-column";
 import Map from "./map";
 import AvailabilityTable from "./availability-table";
+import LeadForm from "./lead-form";
+import LeadFormTwoColumn from "./leadform-two-column";
 
 interface Props {
     pageBuilder: any[];
@@ -482,6 +484,31 @@ export default function Main({
                             textAlign={section?.textAlign}
                             {...settingsSchema}
                         />
+                    );
+                }
+
+                if (section._type === 'leadForm') {
+                    return (
+                        <>
+                            {section?.layoutType === 'oneColumn' &&
+                                <LeadForm
+                                    key={section?._key}
+                                    formSchema={section?.formBuilder}
+                                    content={section?.content}
+                                    textAlign={section?.textAlign}
+                                    {...settingsSchema}
+                                />
+                            }
+                            {section?.layoutType === 'twoColumn' &&
+                                <LeadFormTwoColumn
+                                    key={section?._key}
+                                    formSchema={section?.formBuilder}
+                                    content={section?.content}
+                                    textAlign={section?.textAlign}
+                                    {...settingsSchema}
+                                />
+                            }
+                        </>
                     );
                 }
 

@@ -111,13 +111,7 @@ export default defineType({
             },
             fields: [
                 {
-                    title: 'Display Single Column',
-                    name: 'singleColumn',
-                    type: 'boolean',
-                    description: 'Change the footer layout to single column'
-                },
-                {
-                    title: 'Footer Logo',
+                    title: 'Footer Logos',
                     name: 'footerLogos',
                     type: 'array',
                     of: [
@@ -135,6 +129,11 @@ export default defineType({
                                     title: 'Alt Text',
                                     name: 'altText',
                                     type: 'string'
+                                },
+                                {
+                                    title: 'width',
+                                    name: 'width',
+                                    type: 'number'
                                 }
                             ]
                         }

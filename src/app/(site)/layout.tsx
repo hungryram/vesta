@@ -5,7 +5,7 @@ import './globals.css'
 import { appearance, mainLayoutProfile } from '../../../lib/groq-data'
 import { Metadata } from 'next';
 import GoogleAnalytics from './components/global/analytics'
-import { interFont } from '../fonts'
+import { headingFont, bodyFont } from '../fonts'
 import Pixel from './components/global/pixel'
 import NavbarWide from './components/global/navbar-wide'
 export const revalidate = 0
@@ -127,10 +127,9 @@ export default async function RootLayout({
     enableTransparent: data?.appearances?.header?.enableTransparent,
   }
 
-
   return (
     <html lang="en">
-      <body className={interFont.variable}>
+      <body className={`${bodyFont.variable} ${headingFont.variable}`}>
         {data?.profileSettings?.settings?.googleID &&
           <GoogleAnalytics GA_TRACKING_ID={data?.profileSettings?.settings?.googleID} />
         }

@@ -64,12 +64,12 @@ export default function Footer({
     const imageContent = (
       <div className="mx-3">
         <Image
-          src={urlForImage(image.logo).url()}
+          src={image?.logo?.asset?.url}
           alt={image?.altText ? image?.altText : image?.asset?.altText}
           width={image?.width ? image?.width : 60}
           height={48}
-          placeholder={image?.asset?.lqip ? 'blur' : 'empty'}
-          blurDataURL={image?.asset?.lqip}
+          placeholder={image?.logo?.asset?.lqip ? 'blur' : 'empty'}
+          blurDataURL={image?.logo?.asset?.lqip}
           className="inline"
         />
       </div>
@@ -84,38 +84,25 @@ export default function Footer({
   return (
     <footer className={Styles.footer}>
       <div className="container">
-        {singleColumn &&
-          <div className="leading-7 md:flex items-center justify-center text-center md:space-x-6 mb-6">
-            <div className="pt-20">
-              <ul className="text-center text-lg">
-                <li className="inline-block px-4 border-r border-black">
-                  <a href={`/`}>{website}</a>
-                </li>
-                <li className="inline-block px-4 border-r border-black">
-                  <a href={`mailto:${email}`}>{email}</a>
-                </li>
-                <li className="inline-block px-4 border-r border-black">
-                  <a href={`tel:${phone_number}`}>{phone_number}</a>
-                </li>
-                <li className="inline-block px-4">
-                  <a href={`https://www.google.com/maps/place/${address}+${city}+${state}+${zip_code}`} target="_blank">{address} {city}, {state} {zip_code}</a>
-                </li>
-              </ul>
-            </div>
+        <div className="md:flex items-center md:justify-between md:text-left text-center space-y-10 mb-10">
+          <div>
+            <span>Contact:</span> <span><a href={`mailto:${email}`}>{email}</a></span>
+            <p><a href={`https://www.google.com/maps/place/${address}+${city}+${state}+${zip_code}`} target="_blank">{address} {city}, {state} {zip_code}</a></p>
           </div>
-        }
+          <div className="flex items-center justify-center">
+            {footerLogos?.map((node: any) => (
+              <FooterLogoComponent image={node} />
+            ))}
+          </div>
+        </div>
         {footerDisclaimer &&
-          <div className="text-center text-[10px] my-2">
+          <div className="text-left text-[10px] my-2">
             <ContentEditor
               content={footerDisclaimer}
             />
           </div>
         }
-        <div className="flex items-center justify-center">
-          {footerLogos?.map((node: any) => (
-            <FooterLogoComponent image={node} />
-          ))}
-        </div>
+
         {legal &&
           <ul className="space-y-3 mb-2">
             {legal?.map((node: any) => (

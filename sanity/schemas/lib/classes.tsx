@@ -55,6 +55,7 @@ export const pageBuilderSchema = [
     { type: 'contactPage' },
     { type: 'testimonialBuilder' },
     { type: 'blogDisplay' },
+    { type: 'leadForm' },
 ]
 
 export const pageTypes = [

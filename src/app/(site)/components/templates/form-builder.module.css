@@ -3,10 +3,30 @@
 }
 
 .formDefaultInput {
-    @apply border rounded-sm px-3 py-2 w-full bg-gray-100;
-    border-color: #ccc;
+    @apply border px-3 h-7 w-full bg-transparent col-span-3;
+    border-color: var(--primary-accent);
+}
+
+.textarea {
+    @apply border px-3 w-full bg-transparent col-span-3;
+    border-color: var(--primary-accent);
 }
 
 .formInputList {
-    @apply block text-sm font-medium leading-6 text-gray-900
+    @apply block text-sm font-medium leading-6 bg-transparent
+}
+
+.select {
+    background-color: transparent;
+    @apply col-span-3 w-full;
+}
+
+.formSubmit:hover {
+    background-color: var(--primary-accent);
+    color: #fff;
+    @apply transition-all duration-300
+}
+
+.formSubmit {
+    @apply transition-all duration-300
 }

@@ -1,12 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://use.typekit.net/qyo1ici.css");
 
 body {
-  font-family: var(--body-font);
+  font-family: "aktiv-grotesk", sans-serif;
   background-color: var(--website-body-color);
   color: var(--website-text-color, #525252);
   font-size: 16px;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 .section {
@@ -23,6 +28,10 @@ body {
 
 .bg-accent {
   background-color: var(--primary-button-background);
+}
+
+.border-accent {
+  border-color: var(--primary-accent);
 }
 
 .primary-button {
@@ -55,6 +64,7 @@ body .content h5,
 body .content h6 {
   @apply leading-snug font-medium mb-6 mt-2;
   color: var(--website-heading-color, #000);
+  font-family: var(--heading-font);
 }
 
 .content h1 {
