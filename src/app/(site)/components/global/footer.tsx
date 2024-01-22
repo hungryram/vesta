@@ -84,12 +84,12 @@ export default function Footer({
   return (
     <footer className={Styles.footer}>
       <div className="container">
-        <div className="md:flex items-center md:justify-between md:text-left text-center space-y-10 mb-10">
+        <div className="md:flex items-center md:justify-between md:text-left text-center md:space-y-0 space-y-10 mb-10">
           <div>
             <span>Contact:</span> <span><a href={`mailto:${email}`}>{email}</a></span>
             <p><a href={`https://www.google.com/maps/place/${address}+${city}+${state}+${zip_code}`} target="_blank">{address} {city}, {state} {zip_code}</a></p>
           </div>
-          <div className="flex items-center justify-center">
+          <div>
             {footerLogos?.map((node: any) => (
               <FooterLogoComponent image={node} />
             ))}
