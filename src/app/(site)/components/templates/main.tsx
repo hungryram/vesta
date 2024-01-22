@@ -26,6 +26,7 @@ import Map from "./map";
 import AvailabilityTable from "./availability-table";
 import LeadForm from "./lead-form";
 import LeadFormTwoColumn from "./leadform-two-column";
+import CalltoActionThreeColumn from "./cta-three-column";
 
 interface Props {
     pageBuilder: any[];
@@ -292,12 +293,24 @@ export default function Main({
 
                                 />
                             }
+                            {section.layoutType === 'threeColumn' &&
+                                <CalltoActionThreeColumn
+                                    key={section?._key}
+                                    textAlign={section?.textAlign}
+                                    content={section?.content}
+                                    image={section?.imageData?.asset?.url}
+                                    altText={section?.imageData?.asset?.altText}
+                                    blurData={section?.imageData?.asset?.lqip}
+                                    {...settingsSchema}
+
+                                />
+                            }
                             {section.layoutType === 'textAndImage' &&
                                 <CalltoActionTextImage
                                     key={section?._key}
-                                    image={section?.imageData?.asset?.url}
                                     content={section?.content}
                                     reverseColumn={section?.reverseColumn}
+                                    image={section?.imageData?.asset?.url}
                                     altText={section?.imageData?.asset?.altText}
                                     blurData={section?.imageData?.asset?.lqip}
                                     {...settingsSchema}

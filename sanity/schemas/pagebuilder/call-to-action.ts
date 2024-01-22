@@ -20,6 +20,7 @@ export default defineType({
                     { title: "Text and Image", value: "textAndImage" },
                     { title: "Left Text with Right Buttons", value: "ButtonRightTextLeft" },
                     { title: "Full Width Text & Image", value: "fullWidthTextImage" },
+                    { title: "Three Column", value: "threeColumn" },
                 ],
             },
             initialValue: "banner"
