@@ -1,4 +1,3 @@
-'use client'
 import React from 'react';
 import { submitForm } from './_formActions'
 import Styles from "./form-builder.module.css"

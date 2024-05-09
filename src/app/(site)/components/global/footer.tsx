@@ -90,8 +90,8 @@ export default function Footer({
             <p><a href={`https://www.google.com/maps/place/${address}+${city}+${state}+${zip_code}`} target="_blank">{address} {city}, {state} {zip_code}</a></p>
           </div>
           <div>
-            {footerLogos?.map((node: any) => (
-              <FooterLogoComponent image={node} />
+            {footerLogos?.map((node: any, i: number) => (
+              <FooterLogoComponent image={node} id={i} />
             ))}
           </div>
         </div>
