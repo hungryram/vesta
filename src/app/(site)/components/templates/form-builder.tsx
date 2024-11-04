@@ -1,8 +1,9 @@
 'use client'
-import React from 'react';
+import React, { useState } from 'react';
 import { submitForm } from './_formActions'
 import Styles from "./form-builder.module.css"
 import ContentEditor from '../util/content-editor';
+import { FaSpinner } from 'react-icons/fa';
 
 interface FormField {
   name: string;
@@ -37,9 +38,28 @@ interface FormBuilderProps {
 }
 
 export default function FormBuilder({ formSchema }: FormBuilderProps) {
+
+  const [sending, setSending] = useState('Idle');
+  const [buttonState, setButtonState] = useState(false)
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // Ensure preventDefault is correctly invoked here
+    setSending('Sending');
+
+    const formData = new FormData(e.currentTarget);
+
+    try {
+      await submitForm(formData, formSchema?.spreadsheetId, formSchema?.sheetName);
+      setSending('Sent');
+    } catch (error) {
+      setSending('Error');
+    }
+  };
+
+
   return (
     <div className="py-2">
-      <form action={(data) => submitForm(data, formSchema?.spreadsheetId, formSchema?.sheetName)}>
+      <form onSubmit={handleSubmit}> {/* Ensure onSubmit is bound to handleSubmit */}
         <label className="hidden" htmlFor="name-honey" />
         <input className="hidden" type="text" name="name-honey" />
         <input className="hidden" type="hidden" name="bcc" value={formSchema?.emailBcc} />
@@ -178,12 +198,19 @@ export default function FormBuilder({ formSchema }: FormBuilderProps) {
           <div className="col-span-1">
             {/* LEAVE EMPTY */}
           </div>
-          <button type="submit" className={`${Styles.formSubmit} col-span-3 bg-transparent accent border border-accent py-2`} style={{
+          <button type="submit" disabled={sending === 'Sending' || sending === 'Sent'} className={`${Styles.formSubmit} col-span-3 bg-transparent accent border border-accent py-2`} style={{
             backgroundColor: formSchema?.buttonBackgroundColor?.hex,
             color: formSchema?.buttonTextColor?.hex
           }}>
-            {formSchema?.buttonLabel ?? 'Submit'}
-          </button>
+              {sending === 'Idle' ?
+                `${formSchema?.buttonLabel ?? 'SUBMIT'}`
+                : sending === 'Sending' ?
+                  <FaSpinner className="animate-spin mx-auto text-xl" />
+                  : sending === 'Sent' ?
+                    'Sent'
+                    : 'Error'
+              }          
+                        </button>
         </div>
       </form>
     </div>
